@@ -83,6 +83,9 @@ Priority(topPriorityLevel);
 
 gridPos = 0;
 
+activeKeys = [KbName('LeftArrow') KbName('RightArrow')];
+RestrictKeysForKbCheck(activeKeys);
+
 % Loop the animation until a key is pressed
 while ~KbCheck
     while gridPos <= 500
