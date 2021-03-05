@@ -70,7 +70,7 @@ dotSizes = rand(1, numDots) .* 20 + 10;
 % Our grid will oscilate with a sine wave function to the left and right
 % of the screen. These are the parameters for the sine wave
 % See: http://en.wikipedia.org/wiki/Sine_wave
-speed = screenYpixels * 0.25;
+speed = screenYpixels * 0.15;
 time = 0;
 
 % Sync us and get a time stamp
@@ -86,19 +86,30 @@ gridPos = 0;
 % Loop the animation until a key is pressed
 while ~KbCheck
     while gridPos <= 500
-        % Position of the square on this frame
-        gridPos = speed * time;
+        if ~KbCheck
+            % Position of the square on this frame
+            gridPos = speed * time;
 
-        % Draw all of our dots to the screen in a single line of code adding
-        % the sine oscilation to the X coordinates of the dots
-        Screen('DrawDots', window, [xPosVector + gridPos; yPosVector],...
-            dotSizes, dotColors, dotCenter, 2);
+            % Draw all of our dots to the screen in a single line of code adding
+            % the sine oscilation to the X coordinates of the dots
+            Screen('DrawDots', window, [xPosVector + gridPos; yPosVector],...
+                dotSizes, dotColors, dotCenter, 2);
 
-        % Flip to the screen
-        vbl  = Screen('Flip', window, vbl + (waitframes - 0.5) * ifi);
+            % Flip to the screen
+            vbl  = Screen('Flip', window, vbl + (waitframes - 0.5) * ifi);
 
-        % Increment the time
-        time = time + ifi;
+            % Increment the time
+            time = time + ifi;
+        else
+            break
+        end
+    end
+    if ~KbCheck
+        time = 0;
+        gridPos = 0;
+        pause(1);
+    else
+        break
     end
 end
 
