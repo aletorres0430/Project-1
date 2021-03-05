@@ -115,6 +115,13 @@ while ~KbCheck
         break
     end
 end
+[keyIsDown, secs, keyCode] = KbCheck;
+if find(keyCode, 1) == 79
+    pressed_right = 1;
+else
+    pressed_right = 0;
+end
+
 
 % Clear the screen. "sca" is short hand for "Screen CloseAll". This clears
 % all features related to PTB. Note: we leave the variables in the
