@@ -51,7 +51,7 @@ DrawFormattedText(window, 'Match the bottom card to one of the cards \n above ba
 
 Screen('TextSize', window, 40);
 Screen('TextFont', window, 'Courier');
-DrawFormattedText(window, 'Color, Type of Shape, Number of Shapes' ,...
+DrawFormattedText(window, 'Color, Type of Shape, or Number of Shapes' ,...
 'center', screenYpixels * 0.6, [1 1 1]);
 
 Screen('TextSize', window, 20);
@@ -62,4 +62,31 @@ DrawFormattedText(window, 'Press any key to continue' ,...
 Screen('Flip', window);
 KbStrokeWait;
 
+card1=imread('circle1red.png');
+card2=imread('circle1blue.png');
+card3=imread('circle1green.png');
+card4=imread('circle1yellow.png');
+
+xcen = windowRect(3)/2;
+ycen = windowRect(4)/2;
+
+% make a texture for each picture
+T1 = Screen('MakeTexture', window, card1);
+T2 = Screen('MakeTexture', window, card2);
+T3 = Screen('MakeTexture', window, card3);
+T4 = Screen('MakeTexture', window, card4);
+T = [T1 T2 T3 T4]; %make an vector of texture pointers
+
+% make a rect for each
+rect1 = CenterRectOnPointd([0 0 200 200], xcen-(xcen/2), ycen/2)';
+rect2 = CenterRectOnPointd([0 0 200 200], xcen-(xcen/6), ycen/2)';
+rect3 = CenterRectOnPointd([0 0 200 200], xcen+(xcen/6), ycen/2)';
+rect4 = CenterRectOnPointd([0 0 200 200], xcen+(xcen/2), ycen/2)';
+rects = [rect1 rect2 rect3 rect4]; %row for each rect
+
+Screen('DrawTextures', window, T,[],rects);
+
+Screen('Flip', window)
+
+KbStrokeWait;
 sca;
