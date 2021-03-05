@@ -24,6 +24,7 @@ grey = white / 2;
 [window, windowRect] = PsychImaging('OpenWindow', screenNumber, black);
 [screenXpixels, screenYpixels] = Screen('WindowSize', window);
 
+
 %setting text for starting page
 Screen('TextSize', window, 50);
 Screen('TextFont', window, 'Courier');
@@ -35,7 +36,30 @@ Screen('TextFont', window, 'Courier');
 DrawFormattedText(window, 'Please read all instructions carefully' ,...
 'center', screenYpixels * 0.6, [1 1 1]);
 
-Screen('Flip', window);
+Screen('TextSize', window, 20);
+Screen('TextFont', window, 'Courier');
+DrawFormattedText(window, 'Press any key to continue' ,...
+'center', screenYpixels * 0.9, [1 1 1]);
 
+Screen('Flip', window);
 KbStrokeWait;
+
+Screen('TextSize', window, 40);
+Screen('TextFont', window, 'Courier');
+DrawFormattedText(window, 'Match the bottom card to one of the cards \n above based on the following rules:' ,...
+'center', screenYpixels * 0.3, [1 1 1]);
+
+Screen('TextSize', window, 40);
+Screen('TextFont', window, 'Courier');
+DrawFormattedText(window, 'Color, Type of Shape, Number of Shapes' ,...
+'center', screenYpixels * 0.6, [1 1 1]);
+
+Screen('TextSize', window, 20);
+Screen('TextFont', window, 'Courier');
+DrawFormattedText(window, 'Press any key to continue' ,...
+'center', screenYpixels * 0.9, [1 1 1]);
+
+Screen('Flip', window);
+KbStrokeWait;
+
 sca;
