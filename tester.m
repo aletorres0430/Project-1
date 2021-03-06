@@ -39,6 +39,8 @@ black = BlackIndex(screenNumber);
 % Enable alpha blending for anti-aliasing
 Screen('BlendFunction', window, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+%CODE STARTS HERE
+
 Screen('TextSize', window, 50);
 Screen('TextFont', window, 'Courier');
 DrawFormattedText(window, 'Use left or right arrow key to \n input which direction the dots are moving' ,...
