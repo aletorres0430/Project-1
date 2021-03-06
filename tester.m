@@ -105,7 +105,7 @@ while ~correct
 
                 % Draw all of our dots to the screen in a single line of code adding
                 Screen('DrawDots', window, [xPosVector + gridPos; yPosVector],...
-                    dotSizes, dotColors, dotCenter, 4);
+                    dotSizes, dotColors, dotCenter, 2);
 
                 % Flip to the screen
                 vbl  = Screen('Flip', window, vbl + (waitframes - 0.5) * ifi);
