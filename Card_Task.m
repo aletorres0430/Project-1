@@ -78,10 +78,11 @@ T4 = Screen('MakeTexture', window, card4);
 T = [T1 T2 T3 T4]; %make an vector of texture pointers
 
 % make a rect for each
-rect1 = CenterRectOnPointd([0 0 200 200], xcen-(xcen/2), ycen/2)';
-rect2 = CenterRectOnPointd([0 0 200 200], xcen-(xcen/6), ycen/2)';
-rect3 = CenterRectOnPointd([0 0 200 200], xcen+(xcen/6), ycen/2)';
-rect4 = CenterRectOnPointd([0 0 200 200], xcen+(xcen/2), ycen/2)';
+%error when matrix wasn't 4x4x
+rect1 = CenterRectOnPointd([200 200 0 0], xcen-(xcen/2), ycen/2)';
+rect2 = CenterRectOnPointd([200 200 0 0], xcen-(xcen/6), ycen/2)';
+rect3 = CenterRectOnPointd([200 200 0 0], xcen+(xcen/6), ycen/2)';
+rect4 = CenterRectOnPointd([200 200 0 0], xcen+(xcen/2), ycen/2)';
 rects = [rect1 rect2 rect3 rect4]; %row for each rect
 
 Screen('DrawTextures', window, T,[],rects);
