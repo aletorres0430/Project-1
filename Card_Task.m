@@ -62,10 +62,10 @@ DrawFormattedText(window, 'Press any key to continue' ,...
 Screen('Flip', window);
 KbStrokeWait;
 
-card1=imread('circle1red.png');
-card2=imread('circle1blue.png');
-card3=imread('circle1green.png');
-card4=imread('circle1yellow.png');
+card1=imread('stimuli/circle1red.png');
+card2=imread('stimuli/circle1blue.png');
+card3=imread('stimuli/circle1green.png');
+card4=imread('stimuli/circle1yellow.png');
 
 % make a texture for each picture
 T1 = Screen('MakeTexture', window, card1);
@@ -91,7 +91,7 @@ DrawFormattedText(window, '3' , screenXpixels*.58, screenYpixels*.4, [1 1 1]);
 DrawFormattedText(window, '4' , screenXpixels*.745, screenYpixels*.4, [1 1 1]);
 
 %same process for bottom card
-card5=imread('circle1red.png');
+card5=imread('stimuli/circle1red.png');
 T5= Screen('MakeTexture', window, card5);
 rect5= CenterRectOnPointd([0 0 200 200], xCenter, yCenter/.75)';
 Screen('DrawTexture', window,T5,[],rect5);
