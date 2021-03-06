@@ -39,8 +39,23 @@ black = BlackIndex(screenNumber);
 % Enable alpha blending for anti-aliasing
 Screen('BlendFunction', window, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+Screen('TextSize', window, 50);
+Screen('TextFont', window, 'Courier');
+DrawFormattedText(window, 'Use left or right arrow key to \n input which direction the dots are moving' ,...
+'center', screenYpixels * 0.5, [1 1 1]);
+
+Screen('TextSize', window, 20);
+Screen('TextFont', window, 'Courier');
+DrawFormattedText(window, 'Press any key to continue' ,...
+'center', screenYpixels * 0.9, [1 1 1]);
+    
+Screen('Flip', window);
+RestrictKeysForKbCheck([]);
+KbStrokeWait;
+
 correct = 0;
 while ~correct
+    
     % Query the frame duration
     ifi = Screen('GetFlipInterval', window);
 
@@ -86,8 +101,7 @@ while ~correct
 
     gridPos = 0;
 
-    activeKeys = [KbName('LeftArrow') KbName('RightArrow')];
-    RestrictKeysForKbCheck(activeKeys);
+    RestrictKeysForKbCheck([KbName('LeftArrow') KbName('RightArrow')]);
 
     %50/50 of getting 1 or -1, this determines direction of dots
     coinflip = randi(2);
@@ -135,18 +149,26 @@ while ~correct
     end
 
     if coinflip == pressed_right
-        % display on screen: Correct
-        pause(2);
+        %display 'Correct'
+        Screen('TextSize', window, 60);
+        Screen('TextFont', window, 'Courier');
+        DrawFormattedText(window, 'Correct' ,...
+        'center', screenYpixels * 0.5, [0 1 0]);
+        Screen('Flip', window);
+        pause(1);
         correct = 1;
     else
-        %display on screen: Incorrect
-        pause(2);
+        %display 'Incorrect'
+        Screen('TextSize', window, 60);
+        Screen('TextFont', window, 'Courier');
+        DrawFormattedText(window, 'Incorrect' ,...
+        'center', screenYpixels * 0.5, [1 0 0]);
+        Screen('Flip', window);
+        pause(1);
     end
     
     
 end
+RestrictKeysForKbCheck([]);
 
-% Clear the screen. "sca" is short hand for "Screen CloseAll". This clears
-% all features related to PTB. Note: we leave the variables in the
-% workspace so you can have a look at them if you want.
 sca;
