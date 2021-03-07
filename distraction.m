@@ -1,34 +1,34 @@
-Screen('Preference', 'SkipSyncTests', 1);
-% Clear the workspace and the screen
-sca;
-close all;
-clearvars;
-
-% Here we call some default settings for setting up Psychtoolbox
-PsychDefaultSetup(2);
-
-% Seed the random number generator. Here we use the an older way to be
-% compatible with older systems. Newer syntax would be rng('shuffle'). Look
-% at the help function of rand "help rand" for more information
-rand('seed', sum(100 * clock));
-
-% Get the screen numbers. This gives us a number for each of the screens
-% attached to our computer.
-screens = Screen('Screens');
-
-% Draw we select the maximum of these numbers. So in a situation where we
-% have two screens attached to our monitor we will draw to the external
-% screen. When only one screen is attached to the monitor we will draw to
-% this.
-screenNumber = max(screens);
-
-
-% Define black and white (white will be 1 and black 0).
-white = WhiteIndex(screenNumber);
-black = BlackIndex(screenNumber);
-
-% Open an on screen window and color it black
-[window, windowRect] = PsychImaging('OpenWindow', screenNumber, black);
+% Screen('Preference', 'SkipSyncTests', 1);
+% % Clear the workspace and the screen
+% sca;
+% close all;
+% clearvars;
+% 
+% % Here we call some default settings for setting up Psychtoolbox
+% PsychDefaultSetup(2);
+% 
+% % Seed the random number generator. Here we use the an older way to be
+% % compatible with older systems. Newer syntax would be rng('shuffle'). Look
+% % at the help function of rand "help rand" for more information
+% rand('seed', sum(100 * clock));
+% 
+% % Get the screen numbers. This gives us a number for each of the screens
+% % attached to our computer.
+% screens = Screen('Screens');
+% 
+% % Draw we select the maximum of these numbers. So in a situation where we
+% % have two screens attached to our monitor we will draw to the external
+% % screen. When only one screen is attached to the monitor we will draw to
+% % this.
+% screenNumber = max(screens);
+% 
+% 
+% % Define black and white (white will be 1 and black 0).
+% white = WhiteIndex(screenNumber);
+% black = BlackIndex(screenNumber);
+% 
+% % Open an on screen window and color it black
+% [window, windowRect] = PsychImaging('OpenWindow', screenNumber, black);
 
 % Get the size of the on screen window in pixels
 [screenXpixels, screenYpixels] = Screen('WindowSize', window);

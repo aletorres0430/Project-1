@@ -67,6 +67,7 @@ KbStrokeWait;
 totalrounds = 0;
 rulechanges = 0;
 rule = randi(3);
+distractioncounter = 0;
 
 while rulechanges < 5
     %chooses new rule: 1 is shape, 2 is color, 3 is number
@@ -80,6 +81,12 @@ while rulechanges < 5
     correctcounter = 0;
 
     while correctcounter < 6
+        if totalrounds > 0 
+            if randi(5) == 1
+                distraction
+                distractioncounter = distractioncounter + 1;
+            end
+        end
 
         choose4random
 
