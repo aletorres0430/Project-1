@@ -101,7 +101,7 @@ rect5= CenterRectOnPointd([0 0 200 200], xCenter, yCenter/.75)';
 Screen('DrawTexture', window,T5,[],rect5);
 
 Screen('Flip', window)
-RestrictKeysForKbCheck([KbName('1') KbName('2') KbName('3') KbName('4')]);
-KbCheck;
+RestrictKeysForKbCheck([KbName('1!') KbName('2@') KbName('3#') KbName('4$')]);
+KbStrokeWait;
 
 sca;
