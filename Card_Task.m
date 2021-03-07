@@ -6,6 +6,8 @@ close all;
 clearvars;
 sca
 
+RestrictKeysForKbCheck([]);
+
 %most of the basics are from demos
 %Says to use this so we don't get a screen error
 Screen('Preference', 'SkipSyncTests', 1);
@@ -100,6 +102,6 @@ Screen('DrawTexture', window,T5,[],rect5);
 
 Screen('Flip', window)
 RestrictKeysForKbCheck([KbName('1') KbName('2') KbName('3') KbName('4')]);
-KbStrokeWait;
+KbCheck;
 
 sca;
