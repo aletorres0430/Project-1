@@ -133,6 +133,8 @@ while rulechanges < 5
                 Screen('Flip', window);
                 pause(1);
                 correctcounter = correctcounter + 1;
+        elseif find(keyCode) == 41 %escape was pressed
+            sca
         else
             %they made a mistake, display "Incorrect" and reset counter to 0
             %display 'Incorrect'
