@@ -44,17 +44,7 @@ card3 = allcards(card3number);
 card4 = allcards(card4number);
 card5 = allcards(card5number);
 
-%DELETE THIS LINE, IT IS HERE BECAUSE THERE IS NO CURRENT RULE IN THIS
-%SCRIPT
-rule = randi(3);
-%chooses new rule: 1 is shape, 2 is color, 3 is number
-newrule = randi(3);
 
-%makes sure the new rule is not the same as the old one
-while newrule == rule
-    newrule = randi(3);
-end
-rule = newrule;
 
 %determines which card 1-4 is the correct card for the current rule and
 %sets correctcard equal to that card's number
