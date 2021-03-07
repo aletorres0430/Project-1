@@ -118,7 +118,7 @@ while rulechanges < 5
         Screen('DrawTexture', window,T5,[],rect5);
 
         Screen('Flip', window)
-        RestrictKeysForKbCheck([KbName('1!') KbName('2@') KbName('3#') KbName('4$')]);
+        RestrictKeysForKbCheck([KbName('1!') KbName('2@') KbName('3#') KbName('4$') KbName('ESCAPE')]);
         [secs, keyCode] = KbStrokeWait;
 
         keyPressed = find(keyCode) - 29;
