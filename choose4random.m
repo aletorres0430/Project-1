@@ -21,7 +21,7 @@ card4number = card_colors(4) + 4 * (card_numbers(4) - 1) + 16 * (card_shapes(4) 
 %displayed cards
 card5number = randi(64);
 while (card5number == card1number) || (card5number == card2number) || ...
-        (cardnumber == card3number) || (card5number == card4number)
+        (card5number == card3number) || (card5number == card4number)
     card5number = randi(64);
 end
 
@@ -44,8 +44,9 @@ card3 = allcards(card3number);
 card4 = allcards(card4number);
 card5 = allcards(card5number);
 
-
-
+%DELETE THIS LINE, IT IS HERE BECAUSE THERE IS NO CURRENT RULE IN THIS
+%SCRIPT
+rule = 1;
 %chooses new rule: 1 is shape, 2 is color, 3 is number
 newrule = randi(3);
 
@@ -55,10 +56,15 @@ while newrule == rule
 end
 rule = newrule;
 
+%determines which card 1-4 is the correct card for the current rule and
+%sets correctcard equal to that card's number
 cardnumbers = [card1number card2number card3number card4number];
-if rule == 1
-    correctcard = find(floor(cardnumbers./16), floor(card5number/16));
-elseif rule == 2
-    correctcard = find(floor(cardnumbers./16), floor(card5number/16));
+if rule == 1 %shapes, in blocks of 16
+    correctcardnumber = find(floor(cardnumbers/16) == floor((card5number-1)/16));
+elseif rule == 2 %colors, rotates every 4
+    correctcardnumber = find(mod(cardnumbers, 4) == mod(card5number, 4));
+else %number in blocks of 4
+    correctcardnumber = find(floor(mod((cardnumbers-1), 16)/4) == floor((mod(card5number, 16)-1)/4));
+end
 
-
+correctcard = allcards(cardnumbers(correctcardnumber));
