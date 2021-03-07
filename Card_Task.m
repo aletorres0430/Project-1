@@ -62,16 +62,18 @@ DrawFormattedText(window, 'Press any key to continue' ,...
 Screen('Flip', window);
 KbStrokeWait;
 
-card1=imread('stimuli/circle1red.png');
-card2=imread('stimuli/circle1blue.png');
-card3=imread('stimuli/circle1green.png');
-card4=imread('stimuli/circle1yellow.png');
+choose4random
+
+card1image=imread(card1);
+card2image=imread(card2);
+card3image=imread(card3);
+card4image=imread(card4);
 
 % make a texture for each picture
-T1 = Screen('MakeTexture', window, card1);
-T2 = Screen('MakeTexture', window, card2);
-T3 = Screen('MakeTexture', window, card3);
-T4 = Screen('MakeTexture', window, card4);
+T1 = Screen('MakeTexture', window, card1image);
+T2 = Screen('MakeTexture', window, card2image);
+T3 = Screen('MakeTexture', window, card3image);
+T4 = Screen('MakeTexture', window, card4image);
 T = [T1 T2 T3 T4]; %make an vector of texture pointers
 
 % make a rect for each
@@ -91,8 +93,8 @@ DrawFormattedText(window, '3' , screenXpixels*.58, screenYpixels*.4, [1 1 1]);
 DrawFormattedText(window, '4' , screenXpixels*.745, screenYpixels*.4, [1 1 1]);
 
 %same process for bottom card
-card5=imread('stimuli/circle1red.png');
-T5= Screen('MakeTexture', window, card5);
+card5image=imread(card5);
+T5= Screen('MakeTexture', window, card5image);
 rect5= CenterRectOnPointd([0 0 200 200], xCenter, yCenter/.75)';
 Screen('DrawTexture', window,T5,[],rect5);
 
