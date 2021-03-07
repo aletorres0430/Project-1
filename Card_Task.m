@@ -64,83 +64,88 @@ DrawFormattedText(window, 'Press any key to continue' ,...
 Screen('Flip', window);
 KbStrokeWait;
 
-%DELETE THIS LINE, IT IS HERE BECAUSE THERE IS NO CURRENT RULE IN THIS
-%SCRIPT
+totalrounds = 0;
+rulechanges = 0;
 rule = randi(3);
-%chooses new rule: 1 is shape, 2 is color, 3 is number
-newrule = randi(3);
 
-%makes sure the new rule is not the same as the old one
-while newrule == rule
+while rulechanges < 5
+    %chooses new rule: 1 is shape, 2 is color, 3 is number
     newrule = randi(3);
-end
-rule = newrule;
-correctcounter = 0;
-while correctcounter < 6
 
-    choose4random
-
-    card1image=imread(card1);
-    card2image=imread(card2);
-    card3image=imread(card3);
-    card4image=imread(card4);
-
-    % make a texture for each picture
-    T1 = Screen('MakeTexture', window, card1image);
-    T2 = Screen('MakeTexture', window, card2image);
-    T3 = Screen('MakeTexture', window, card3image);
-    T4 = Screen('MakeTexture', window, card4image);
-    T = [T1 T2 T3 T4]; %make an vector of texture pointers
-
-    % make a rect for each
-    rect1 = CenterRectOnPointd([0 0 200 200], xCenter-(xCenter/2), yCenter/2)';
-    rect2 = CenterRectOnPointd([0 0 200 200], xCenter-(xCenter/6), yCenter/2)';
-    rect3 = CenterRectOnPointd([0 0 200 200], xCenter+(xCenter/6), yCenter/2)';
-    rect4 = CenterRectOnPointd([0 0 200 200], xCenter+(xCenter/2), yCenter/2)';
-    rects = [rect1 rect2 rect3 rect4]; %row for each rect
-
-    Screen('DrawTextures', window, T,[],rects);
-
-    Screen('TextSize', window, 40);
-    Screen('TextFont', window, 'Courier');
-    DrawFormattedText(window, '1' , screenXpixels*.245, screenYpixels*.4, [1 1 1]);
-    DrawFormattedText(window, '2' , screenXpixels*.41, screenYpixels*.4, [1 1 1]);
-    DrawFormattedText(window, '3' , screenXpixels*.58, screenYpixels*.4, [1 1 1]);
-    DrawFormattedText(window, '4' , screenXpixels*.745, screenYpixels*.4, [1 1 1]);
-
-    %same process for bottom card
-    card5image=imread(card5);
-    T5= Screen('MakeTexture', window, card5image);
-    rect5= CenterRectOnPointd([0 0 200 200], xCenter, yCenter/.75)';
-    Screen('DrawTexture', window,T5,[],rect5);
-
-    Screen('Flip', window)
-    RestrictKeysForKbCheck([KbName('1!') KbName('2@') KbName('3#') KbName('4$')]);
-    [secs, keyCode] = KbStrokeWait;
-
-    keyPressed = find(keyCode) - 29;
-
-    if keyPressed == correctcardnumber
-        %they made the right match, display "Correct" and increment the counter
-         %display 'Correct'
-            Screen('TextSize', window, 60);
-            Screen('TextFont', window, 'Courier');
-            DrawFormattedText(window, 'Correct' ,...
-            'center', screenYpixels * 0.5, [0 1 0]);
-            Screen('Flip', window);
-            pause(1);
-            correctcounter = correctcounter + 1;
-    else
-        %they made a mistake, display "Incorrect" and reset counter to 0
-        %display 'Incorrect'
-            Screen('TextSize', window, 60);
-            Screen('TextFont', window, 'Courier');
-            DrawFormattedText(window, 'Incorrect' ,...
-            'center', screenYpixels * 0.5, [1 0 0]);
-            Screen('Flip', window);
-            pause(1);
-            correctcounter = 0;
+    %makes sure the new rule is not the same as the old one
+    while newrule == rule
+        newrule = randi(3);
     end
-end
+    rule = newrule;
+    correctcounter = 0;
 
+    while correctcounter < 6
+
+        choose4random
+
+        card1image=imread(card1);
+        card2image=imread(card2);
+        card3image=imread(card3);
+        card4image=imread(card4);
+
+        % make a texture for each picture
+        T1 = Screen('MakeTexture', window, card1image);
+        T2 = Screen('MakeTexture', window, card2image);
+        T3 = Screen('MakeTexture', window, card3image);
+        T4 = Screen('MakeTexture', window, card4image);
+        T = [T1 T2 T3 T4]; %make an vector of texture pointers
+
+        % make a rect for each
+        rect1 = CenterRectOnPointd([0 0 200 200], xCenter-(xCenter/2), yCenter/2)';
+        rect2 = CenterRectOnPointd([0 0 200 200], xCenter-(xCenter/6), yCenter/2)';
+        rect3 = CenterRectOnPointd([0 0 200 200], xCenter+(xCenter/6), yCenter/2)';
+        rect4 = CenterRectOnPointd([0 0 200 200], xCenter+(xCenter/2), yCenter/2)';
+        rects = [rect1 rect2 rect3 rect4]; %row for each rect
+
+        Screen('DrawTextures', window, T,[],rects);
+
+        Screen('TextSize', window, 40);
+        Screen('TextFont', window, 'Courier');
+        DrawFormattedText(window, '1' , screenXpixels*.245, screenYpixels*.4, [1 1 1]);
+        DrawFormattedText(window, '2' , screenXpixels*.41, screenYpixels*.4, [1 1 1]);
+        DrawFormattedText(window, '3' , screenXpixels*.58, screenYpixels*.4, [1 1 1]);
+        DrawFormattedText(window, '4' , screenXpixels*.745, screenYpixels*.4, [1 1 1]);
+
+        %same process for bottom card
+        card5image=imread(card5);
+        T5= Screen('MakeTexture', window, card5image);
+        rect5= CenterRectOnPointd([0 0 200 200], xCenter, yCenter/.75)';
+        Screen('DrawTexture', window,T5,[],rect5);
+
+        Screen('Flip', window)
+        RestrictKeysForKbCheck([KbName('1!') KbName('2@') KbName('3#') KbName('4$')]);
+        [secs, keyCode] = KbStrokeWait;
+
+        keyPressed = find(keyCode) - 29;
+
+        if keyPressed == correctcardnumber
+            %they made the right match, display "Correct" and increment the counter
+             %display 'Correct'
+                Screen('TextSize', window, 60);
+                Screen('TextFont', window, 'Courier');
+                DrawFormattedText(window, 'Correct' ,...
+                'center', screenYpixels * 0.5, [0 1 0]);
+                Screen('Flip', window);
+                pause(1);
+                correctcounter = correctcounter + 1;
+        else
+            %they made a mistake, display "Incorrect" and reset counter to 0
+            %display 'Incorrect'
+                Screen('TextSize', window, 60);
+                Screen('TextFont', window, 'Courier');
+                DrawFormattedText(window, 'Incorrect' ,...
+                'center', screenYpixels * 0.5, [1 0 0]);
+                Screen('Flip', window);
+                pause(1);
+                correctcounter = 0;
+        end
+        totalrounds = totalrounds + 1;
+    end
+    rulechanges = rulechanges + 1;
+end
 sca;
