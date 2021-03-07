@@ -102,6 +102,15 @@ Screen('DrawTexture', window,T5,[],rect5);
 
 Screen('Flip', window)
 RestrictKeysForKbCheck([KbName('1!') KbName('2@') KbName('3#') KbName('4$')]);
-KbStrokeWait;
+[secs, keyCode] = KbStrokeWait;
+
+keyPressed = find(keyCode) - 29;
+
+if keyPressed == correctcardnumber
+    %they made the right match, display "Correct" and increment the counter
+else
+    %they made a mistake, display "Incorrect" and reset counter to 0
+end
+
 
 sca;
