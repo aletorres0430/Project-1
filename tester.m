@@ -103,7 +103,7 @@ while ~correct
 
     gridPos = 0;
 
-    RestrictKeysForKbCheck([KbName('LeftArrow') KbName('RightArrow')]);
+    RestrictKeysForKbCheck([KbName('LeftArrow') KbName('RightArrow') KbName('ESCAPE')]);
 
     %50/50 of getting 1 or -1, this determines direction of dots
     coinflip = randi(2);
@@ -144,8 +144,10 @@ while ~correct
     %if right is pressed, pressed_right is 1, if left was pressed,
     %pressed_right is -1
     [keyIsDown, secs, keyCode] = KbCheck;
-    if find(keyCode, 1) == 79
+    if find(keyCode) == 79
         pressed_right = 1;
+    elseif find(keyCode) == 41
+        sca
     else
         pressed_right = -1;
     end
@@ -173,4 +175,3 @@ while ~correct
 end
 RestrictKeysForKbCheck([]);
 
-sca;
