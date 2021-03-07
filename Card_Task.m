@@ -108,8 +108,23 @@ keyPressed = find(keyCode) - 29;
 
 if keyPressed == correctcardnumber
     %they made the right match, display "Correct" and increment the counter
+     %display 'Correct'
+        Screen('TextSize', window, 60);
+        Screen('TextFont', window, 'Courier');
+        DrawFormattedText(window, 'Correct' ,...
+        'center', screenYpixels * 0.5, [0 1 0]);
+        Screen('Flip', window);
+        pause(1);
+        correct = 1;
 else
     %they made a mistake, display "Incorrect" and reset counter to 0
+    %display 'Incorrect'
+        Screen('TextSize', window, 60);
+        Screen('TextFont', window, 'Courier');
+        DrawFormattedText(window, 'Incorrect' ,...
+        'center', screenYpixels * 0.5, [1 0 0]);
+        Screen('Flip', window);
+        pause(1);
 end
 
 
