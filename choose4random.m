@@ -46,7 +46,7 @@ card5 = allcards(card5number);
 
 %DELETE THIS LINE, IT IS HERE BECAUSE THERE IS NO CURRENT RULE IN THIS
 %SCRIPT
-rule = 1;
+rule = randi(3);
 %chooses new rule: 1 is shape, 2 is color, 3 is number
 newrule = randi(3);
 
