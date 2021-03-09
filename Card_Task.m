@@ -28,6 +28,8 @@ grey = white / 2;
 [screenXpixels, screenYpixels] = Screen('WindowSize', window);
 [xCenter, yCenter] = RectCenter(windowRect);
 
+%Alejandro set the text for this starting portion
+%took about an hour getting text to go on the correct spot
 %setting text for starting page
 Screen('TextSize', window, 50);
 Screen('TextFont', window, 'Courier');
@@ -52,6 +54,7 @@ DrawFormattedText(window, 'Press any key to continue' ,...
 Screen('Flip', window);
 KbStrokeWait;
 
+%next set of instructions
 Screen('TextSize', window, 40);
 Screen('TextFont', window, 'Courier');
 DrawFormattedText(window, 'Match the bottom card to one of the cards \n above based on the following rules:' ,...
@@ -101,6 +104,10 @@ while rulechanges < 5
         card3image=imread(card3);
         card4image=imread(card4);
 
+        %Alejandro wrote the code for displaying images
+        %this took about three hours finding images learning how
+        %to display multiple images by creating textures and rects
+        %Josh debugged and added the random images variable
         % make a texture for each picture
         T1 = Screen('MakeTexture', window, card1image);
         T2 = Screen('MakeTexture', window, card2image);
@@ -108,15 +115,19 @@ while rulechanges < 5
         T4 = Screen('MakeTexture', window, card4image);
         T = [T1 T2 T3 T4]; %make an vector of texture pointers
 
-        % make a rect for each
+        %make a rect for each
+        %sets the size of the image and placement on screen
         rect1 = CenterRectOnPointd([0 0 200 200], xCenter-(xCenter/2), yCenter/2)';
         rect2 = CenterRectOnPointd([0 0 200 200], xCenter-(xCenter/6), yCenter/2)';
         rect3 = CenterRectOnPointd([0 0 200 200], xCenter+(xCenter/6), yCenter/2)';
         rect4 = CenterRectOnPointd([0 0 200 200], xCenter+(xCenter/2), yCenter/2)';
         rects = [rect1 rect2 rect3 rect4]; %row for each rect
 
+        %displays images on screen
         Screen('DrawTextures', window, T,[],rects);
 
+        %places numbers under each image so participant knows which number
+        %corresponds to each image
         Screen('TextSize', window, 40);
         Screen('TextFont', window, 'Courier');
         DrawFormattedText(window, '1' , screenXpixels*.245, screenYpixels*.4, [1 1 1]);
@@ -124,7 +135,7 @@ while rulechanges < 5
         DrawFormattedText(window, '3' , screenXpixels*.58, screenYpixels*.4, [1 1 1]);
         DrawFormattedText(window, '4' , screenXpixels*.745, screenYpixels*.4, [1 1 1]);
 
-        %same process for bottom card
+        %same image process for bottom card
         card5image=imread(card5);
         T5= Screen('MakeTexture', window, card5image);
         rect5= CenterRectOnPointd([0 0 200 200], xCenter, yCenter/.75)';
