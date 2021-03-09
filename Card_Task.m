@@ -73,11 +73,21 @@ DrawFormattedText(window, 'Press any key to continue' ,...
 Screen('Flip', window);
 KbStrokeWait;
 
+%initialize variables
+%counts how many rounds of card task played over entire time
 totalrounds = 0;
+
+%counts everytime a rule change in the task occurs
+%everytime this goes up it means a rule was completed
 rulechanges = 0;
+
 rule = randi(3);
+
+%counts the number of distraction tasks that appear over entire time
 distractioncounter = 0;
 
+%task continues until a participant has completed the card task over 
+%five different rules
 while rulechanges < 5
     %chooses new rule: 1 is shape, 2 is color, 3 is number
     newrule = randi(3);
@@ -86,11 +96,20 @@ while rulechanges < 5
     while newrule == rule
         newrule = randi(3);
     end
+    
+    %sets the current rule to the new rule that was just randomly chosen
     rule = newrule;
+    
+    %sets the number of correct rounds to zero
     correctcounter = 0;
 
+    %chance for a distraction task to occur only if in the middle of a rule
+    %distraction will not appear if a rule was just finished
     while correctcounter < 6
         if totalrounds > 0 
+            %creats a random number between 1 and 5
+            %if that number is 1 then distraction task appears, distraction
+            %should appear about every 1 out of 5 rounds
             if randi(5) == 1
                 distraction
                 distractioncounter = distractioncounter + 1;
@@ -99,6 +118,7 @@ while rulechanges < 5
 
         choose4random
 
+        %read in the random cards chosen in choose4random script 
         card1image=imread(card1);
         card2image=imread(card2);
         card3image=imread(card3);
@@ -142,6 +162,9 @@ while rulechanges < 5
         Screen('DrawTexture', window,T5,[],rect5);
 
         Screen('Flip', window)
+        
+        %when in card task restricts keys to only 1-4 keys to select card
+        %and escape key to leave task entirely
         RestrictKeysForKbCheck([KbName('1!') KbName('2@') KbName('3#') KbName('4$') KbName('ESCAPE')]);
         [secs, keyCode] = KbStrokeWait;
 
@@ -168,6 +191,11 @@ while rulechanges < 5
                 'center', screenYpixels * 0.5, [1 0 0]);
                 Screen('Flip', window);
                 pause(1);
+                %very important line
+                %if selection in a round is incorrect then correct counter
+                %returns to zero
+                %participant must correctly select a card 5 times in a row
+                %for the loop to end and rule change to occur
                 correctcounter = 0;
         end
         totalrounds = totalrounds + 1;
