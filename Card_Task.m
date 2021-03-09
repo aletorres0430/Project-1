@@ -87,9 +87,11 @@ rule = randi(3);
 %counts the number of distraction tasks that appear over entire time
 distractioncounter = 0;
 
-%This will store the round numbers in which the subject made the
+%This stores the round numbers in which the subject made the
 %wrong choice
 incorrectrounds = [];
+%This stores the round numbers before which a distraction popped up
+distractionrounds = [];
 
 %task continues until a participant has completed the card task over 
 %five different rules
@@ -118,6 +120,7 @@ while rulechanges < 5
             if randi(5) == 1
                 distraction
                 distractioncounter = distractioncounter + 1;
+                distractionrounds = [distractionrounds (totalrounds + 1)];
             end
         end
 
