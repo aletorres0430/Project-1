@@ -31,6 +31,7 @@ grey = white / 2;
 %Alejandro set the text for this starting portion
 %took about an hour getting text to go on the correct spot
 %setting text for starting page
+%Josh proofed 15 minutes
 Screen('TextSize', window, 50);
 Screen('TextFont', window, 'Courier');
 DrawFormattedText(window, 'Wisconsin Card Sorting Task Variation' ,...
@@ -127,7 +128,7 @@ while rulechanges < 5
         %Alejandro wrote the code for displaying images
         %this took about three hours finding images learning how
         %to display multiple images by creating textures and rects
-        %Josh debugged and added the random images variable
+        %Josh debugged for 40 minutes and added the random images variable
         % make a texture for each picture
         T1 = Screen('MakeTexture', window, card1image);
         T2 = Screen('MakeTexture', window, card2image);
@@ -191,7 +192,6 @@ while rulechanges < 5
                 'center', screenYpixels * 0.5, [1 0 0]);
                 Screen('Flip', window);
                 pause(1);
-                %very important line
                 %if selection in a round is incorrect then correct counter
                 %returns to zero
                 %participant must correctly select a card 5 times in a row
