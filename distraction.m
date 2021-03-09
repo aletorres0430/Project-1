@@ -1,34 +1,4 @@
-% Screen('Preference', 'SkipSyncTests', 1);
-% % Clear the workspace and the screen
-% sca;
-% close all;
-% clearvars;
-% 
-% % Here we call some default settings for setting up Psychtoolbox
-% PsychDefaultSetup(2);
-% 
-% % Seed the random number generator. Here we use the an older way to be
-% % compatible with older systems. Newer syntax would be rng('shuffle'). Look
-% % at the help function of rand "help rand" for more information
-% rand('seed', sum(100 * clock));
-% 
-% % Get the screen numbers. This gives us a number for each of the screens
-% % attached to our computer.
-% screens = Screen('Screens');
-% 
-% % Draw we select the maximum of these numbers. So in a situation where we
-% % have two screens attached to our monitor we will draw to the external
-% % screen. When only one screen is attached to the monitor we will draw to
-% % this.
-% screenNumber = max(screens);
-% 
-% 
-% % Define black and white (white will be 1 and black 0).
-% white = WhiteIndex(screenNumber);
-% black = BlackIndex(screenNumber);
-% 
-% % Open an on screen window and color it black
-% [window, windowRect] = PsychImaging('OpenWindow', screenNumber, black);
+%Distraction Script
 
 % Get the size of the on screen window in pixels
 [screenXpixels, screenYpixels] = Screen('WindowSize', window);
@@ -39,13 +9,15 @@
 % Enable alpha blending for anti-aliasing
 Screen('BlendFunction', window, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-%CODE STARTS HERE
 
+%Distraction Opening Screen
+%first text block, instructions for distraction
 Screen('TextSize', window, 50);
 Screen('TextFont', window, 'Courier');
 DrawFormattedText(window, 'Use left or right arrow key to \n input which direction the dots are moving' ,...
 'center', screenYpixels * 0.5, [1 1 1]);
 
+%second text block, press any key
 Screen('TextSize', window, 20);
 Screen('TextFont', window, 'Courier');
 DrawFormattedText(window, 'Press any key to continue' ,...
@@ -55,8 +27,13 @@ Screen('Flip', window);
 RestrictKeysForKbCheck([]);
 KbStrokeWait;
 
+%distraction starts, continues until they get the direction correct
 correct = 0;
 while ~correct
+    %Lines 36-76 sourced from http://peterscarfe.com/ptbtutorials.html,
+    %edited by Josh (tailoring the setup to our project) with Alejandro
+    %observing for 2 hours
+    
     
     % Query the frame duration
     ifi = Screen('GetFlipInterval', window);
@@ -87,11 +64,10 @@ while ~correct
     % Set the size of the dots randomly between 10 and 30 pixels
     dotSizes = rand(1, numDots) .* 20 + 10;
 
-    % Our grid will oscilate with a sine wave function to the left and right
-    % of the screen. These are the parameters for the sine wave
-    % See: http://en.wikipedia.org/wiki/Sine_wave
-    speed = screenYpixels * 0.15;
+    % Initializes the time 0
     time = 0;
+    %We found the optimal speed for the task to be .15
+    speed = screenYpixels * 0.15;
 
     % Sync us and get a time stamp
     vbl = Screen('Flip', window);
@@ -101,8 +77,11 @@ while ~correct
     topPriorityLevel = MaxPriority(window);
     Priority(topPriorityLevel);
 
+    %The dot grid starts at the horizontal center of the screen
     gridPos = 0;
 
+    %The only keys that can be pressed are leftarrow, rightarrow, and
+    %escape
     RestrictKeysForKbCheck([KbName('LeftArrow') KbName('RightArrow') KbName('ESCAPE')]);
 
     %50/50 of getting 1 or -1, this determines direction of dots
@@ -113,13 +92,20 @@ while ~correct
 
 
     % Loop the animation until a key is pressed
+    %Written by Josh with Alejandro observing:
+        %2 hours to design the movement of the dotgrid and base it on the random
+        %coinflip
+        %1 hour to incoporate the keystroke checks to determine accuracy
     while ~KbCheck
         while (gridPos < 500) && (gridPos > -500)
             if ~KbCheck
                 % Position of the square on this frame
+                %coinflip makes gridPos positive if moving right and
+                %negative if moving left
                 gridPos = speed * time * coinflip;
 
-                % Draw all of our dots to the screen in a single line of code adding
+                % Draws the dot grid, changing every value in the x
+                % position vector by gridPos
                 Screen('DrawDots', window, [xPosVector + gridPos; yPosVector],...
                     dotSizes, dotColors, dotCenter, 2);
 
@@ -129,20 +115,29 @@ while ~correct
                 % Increment the time
                 time = time + ifi;
             else
+                %If a key was pressed, end the animation
                 break
             end
         end
+        %The animation ends, the grid has reached the edge of the screen
+        %This resets the animation
         if ~KbCheck
             time = 0;
             gridPos = 0;
             pause(1);
         else
+            %If, while the animation is paused in its final frame, a key is
+            %pressed, end the animation loop
             break
         end
     end
 
     %if right is pressed, pressed_right is 1, if left was pressed,
     %pressed_right is -1
+    %if escape was pressed, Close All
+    %Josh spent 45 minutes figuring out the KbCheck function and
+    %determining and implementing the correct keyCodes while Alejandro
+    %observed and did research
     [keyIsDown, secs, keyCode] = KbCheck;
     if find(keyCode) == 79
         pressed_right = 1;
@@ -152,6 +147,10 @@ while ~correct
         pressed_right = -1;
     end
 
+    %if the correct key is pressed, display correct and exit the
+    %distraction
+    %if the incorrect key is pressed, display incorrect and restart the
+    %distraction
     if coinflip == pressed_right
         %display 'Correct'
         Screen('TextSize', window, 60);
@@ -173,5 +172,7 @@ while ~correct
     
     
 end
+%Removes the key restrictions, now any key can be pressed as we return to
+%the card sorting task
 RestrictKeysForKbCheck([]);
 
