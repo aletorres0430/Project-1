@@ -1,6 +1,7 @@
 %Josh Assi & Alejandro Torres
 % Wisconsin Card Sorting Task Variation
 
+
 % Clear the workspace and the screen
 close all;
 clearvars;
@@ -31,12 +32,17 @@ grey = white / 2;
 Screen('TextSize', window, 50);
 Screen('TextFont', window, 'Courier');
 DrawFormattedText(window, 'Wisconsin Card Sorting Task Variation' ,...
-'center', screenYpixels * 0.5, [1 1 1]);
+'center', screenYpixels * 0.4, [1 1 1]);
 
 Screen('TextSize', window, 40);
 Screen('TextFont', window, 'Courier');
 DrawFormattedText(window, 'Please read all instructions carefully' ,...
-'center', screenYpixels * 0.6, [1 1 1]);
+'center', screenYpixels * 0.5, [1 1 1]);
+
+Screen('TextSize', window, 20);
+Screen('TextFont', window, 'Courier');
+DrawFormattedText(window, 'Images credited to Professor Gijsbert Stoet \n and PsyToolkit main website ' ,...
+'center', screenYpixels * 0.7, [1 1 1]);
 
 Screen('TextSize', window, 20);
 Screen('TextFont', window, 'Courier');
