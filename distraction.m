@@ -92,7 +92,10 @@ while ~correct
 
 
     % Loop the animation until a key is pressed
-    %Written by Josh with Alejandro observing:
+    %Written by Josh with Alejandro observing as code was being pushed:
+    %Alejandro debugged and fixed the KbCheck functions
+    %this took about an hour to look for names of keycodes and correctly
+    %restrict keys
         %2 hours to design the movement of the dotgrid and base it on the random
         %coinflip
         %1 hour to incoporate the keystroke checks to determine accuracy
@@ -137,7 +140,8 @@ while ~correct
     %if escape was pressed, Close All
     %Josh spent 45 minutes figuring out the KbCheck function and
     %determining and implementing the correct keyCodes while Alejandro
-    %observed and did research
+    %observed and did research on how to write it while code was being
+    %pushed
     [keyIsDown, secs, keyCode] = KbCheck;
     if find(keyCode) == 79
         pressed_right = 1;
