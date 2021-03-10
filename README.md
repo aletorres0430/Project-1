@@ -18,3 +18,4 @@ incorrectrounds = a vector storing the numbers of rounds which the subject made 
 These data might be useful to analyze how the distractions affected the subject's performance on the test.
 The video shows a few rounds, between which a few distractions pop up and a rule change happens.
 
+![](WCSTvideo.gif)
