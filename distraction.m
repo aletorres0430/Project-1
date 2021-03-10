@@ -3,7 +3,7 @@
 % Get the size of the on screen window in pixels
 [screenXpixels, screenYpixels] = Screen('WindowSize', window);
 
-% Get the centre coordinate of the window in pixels
+% Get the center coordinate of the window in pixels
 [xCenter, yCenter] = RectCenter(windowRect);
 
 % Enable alpha blending for anti-aliasing
@@ -85,6 +85,7 @@ while ~correct
     RestrictKeysForKbCheck([KbName('LeftArrow') KbName('RightArrow') KbName('ESCAPE')]);
 
     %50/50 of getting 1 or -1, this determines direction of dots
+    %1 will make the grid move right, -1 will make it move left
     coinflip = randi(2);
     if coinflip == 2
         coinflip = -1;
@@ -123,7 +124,7 @@ while ~correct
             end
         end
         %The animation ends, the grid has reached the edge of the screen
-        %This resets the animation
+        %This resets the animation after a short pause
         if ~KbCheck
             time = 0;
             gridPos = 0;
