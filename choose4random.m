@@ -14,11 +14,9 @@ card_shapes = randperm(4);
 %Written by Josh in 3 hours, most of which was spent figuring out how to
 %extract the card corresponding to a spefic set of color,shape, number
 %values. I used a base 4 system explained below to do this.
-%each card number is determined by its position in each shape, number, and
-%color range
-%The image files in the stimuli folder are organized first by color, then
-%number, then shape
-%This means, by numbering the files 1-64, a base 4 numbering system can be
+%each card number is determined by its shape, number, and
+%color, using the pattern in the stimuli folder.
+%By numbering the files 1-64, a base 4 numbering system can be
 %used to extract the card pertaining to a certain color, number, and shape
 %Color is the ones place, number is the fours place, and shape is the
 %sixteens place
